@@ -25,29 +25,6 @@ class HttpClient {
       );
     }
   }
-
-  async getTotalBlocks() {
-    try {
-      const response = await fetch(
-        `https://api-sepolia-etherscan.io/api?module=proxy&action=eth_getBlockByNumber&latestYes&apikey=${this.apiKey}`
-      );
-
-      if (response.ok) {
-        const result = await response.json();
-        if (result.status === '1') {
-          return result.result;
-        } else {
-          throw new Error(`Etherscan API error: ${result.message}`);
-        }
-      } else {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-    } catch (error) {
-      throw new Error(
-        `An error occurred in the getTransactions method: ${error}`
-      );
-    }
-  }
 }
 
 export default HttpClient;
